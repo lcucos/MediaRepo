@@ -1,0 +1,4 @@
+masterFolder  =/home/lcucos/Pictures/06-17-2012
+newFilesFolder=/extra/share/pictures
+isServer=true
+repo=mem
