@@ -27,6 +27,6 @@ Current status: very basic functionality (the result of a few hours in a weekend
 - flexible storage infrastructure (currently only in-memory and remote store is implemented) mogodb will be next
 - scans local folders and query the centralized repo for potential matches
 
-Require: java 1.6 or above
+Requires: java 1.6 or above
 
 
