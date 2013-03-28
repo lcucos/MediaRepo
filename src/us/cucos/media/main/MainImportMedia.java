@@ -1,5 +1,6 @@
 package us.cucos.media.main;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -54,8 +55,14 @@ public class MainImportMedia {
 			return;
 		}
 		FolderScanner scanner = new FolderScanner();		
-		FolderStatistics fStats = scanner.loadFolder(cmdArgs.getProperty(CmdArgs.IMPORT_FOLDER), storage);
-		MyLog.d("Stats: " + fStats.toString());
+		String folder = cmdArgs.getProperty(CmdArgs.IMPORT_FOLDER);
+		StringTokenizer stTok = new StringTokenizer(folder, ",");
+		
+		while(stTok.hasMoreTokens()){
+			String crtFolder = stTok.nextToken();
+			FolderStatistics fStats = scanner.loadFolder(crtFolder, storage);
+			MyLog.d("Stats: " + fStats.toString());
+		}
 	}
 
 	public static void main(String args[]){

@@ -19,7 +19,9 @@ public class FolderScanner {
 		public boolean accept(File dir, String name) {
 			String nameCI = name.toLowerCase();
 			File subfold = new File(dir, name);
-			if(nameCI.endsWith(".jpg") || nameCI.endsWith(".png") || nameCI.endsWith(".tiff") || subfold.isDirectory()){
+			if( nameCI.endsWith(".jpg") || nameCI.endsWith(".png") || nameCI.endsWith(".tiff") || 
+				nameCI.endsWith(".mts") || nameCI.endsWith(".mov") || nameCI.endsWith(".mp4") 
+					|| subfold.isDirectory()){
 				return true;
 			}
 			return false;
@@ -37,12 +39,12 @@ public class FolderScanner {
 		FolderStatistics fStats = new FolderStatistics(folder);
 		
 		if(!folder.isDirectory()){
-			MyLog.e("Please specify a folder to scan for pictures: " + folderName);
+			MyLog.e("Please specify a folder to scan for media files: " + folderName);
 			return null;
 		}
 		File files[]  = folder.listFiles(filter);
 		if(files==null || files.length==0){
-			MyLog.d("Folder with no pictures: " + folder.getAbsolutePath());
+			MyLog.d("Folder with no media files: " + folder.getAbsolutePath());
 			return null;
 		}
 		MyLog.d("Scan folder: " + folder.getAbsolutePath());
@@ -53,9 +55,9 @@ public class FolderScanner {
 			storage.loadFileInfo(newFiles.getJSONObject(i));
 		}
 		if(newFiles.length()==files.length){
-			MyLog.d("All new documents in folder: " + folderName);
+			MyLog.d("All new media files in folder: " + folderName);
 		}else if(newFiles.length()>0){
-			MyLog.d("Found new documents in folder: " + folderName);
+			MyLog.d("Found new media files in folder: " + folderName);
 			for(int i=0;i<newFiles.length();i++){
 				MyLog.d(newFiles.getJSONObject(i).getString(IMetaDataStorage.FILE_NAME_TAG));
 			}

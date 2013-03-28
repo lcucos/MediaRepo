@@ -2,6 +2,7 @@ package us.cucos.media.storage;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -48,8 +49,13 @@ public class DataStorageMem implements IMetaDataStorage{
 		}
 		MyLog.d("Use: MemoryStore");
 		FolderScanner scanner = new FolderScanner();		
-		FolderStatistics fStats = scanner.loadFolder(masterFolder, this);
-		MyLog.d("Master Folder: " + fStats!=null?fStats.toString():"");
+		StringTokenizer stTok = new StringTokenizer(masterFolder, ",");
+		
+		while(stTok.hasMoreTokens()){
+			String crtFolder = stTok.nextToken();
+			FolderStatistics fStats = scanner.loadFolder(crtFolder, this);
+			MyLog.d("Master Folder: " + fStats!=null?fStats.toString():"");
+		}
 		return true;
 	}
 
